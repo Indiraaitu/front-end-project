@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/fnaticpng.png" type="image/x-icon">
+
+  <title>
+    CyberSportShop
+  </title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <header class="header_section">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="index.html">
+          <span>
+            CyberSportShop
+          </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""></span>
+        </button>
+
+        <div class="collapse navbar-collapse innerpage_navbar" id="navbarSupportedContent">
+          <ul class="navbar-nav  ">
+            <li class="nav-item ">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">
+                Shop
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="achievements.html">
+                Achievements of our team
+              </a>
+            </li>
+           
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+          <div class="user_option">
+            <a href="">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span>
+                Login
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+            </a>
+            <form class="form-inline ">
+              <button class="btn nav_search-btn" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <section class="achievements_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Achievements of our team 
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="detail-box">
+              <h5>
+                Fast And Free Delivery 
+              </h5>
+              <p>
+                First online-shop with world-wide free and fast delivery! There are no other E-Sport merch shops, which provide the same conditions as we are doing for our best gamers and clients all over the world
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="detail-box">
+              <h5>
+                100k+ orders 
+              </h5>
+              <p>
+                Our orders reached number over 100 thousand! We value our each client and are happy for such an activity and feedback from our clients
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box ">
+            <div class="detail-box">
+              <h5>
+                Best Quality 
+              </h5>
+              <p>
+                Every our product, such as clothes, merch, statues, pins, variations of posters and other things have the best quiality over. We are tend to use the most suitable materials, so every gamer, even with allergies, could enjoy the service fully
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="game_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2 class="">
+        Click the Aim-Check Game
+      </h2>
+      <p>Click the target as many times as you can within the time limit!</p>
+      <button id="start-button">Start</button>
+      <p id="timer">Time Left: 30s</p>
+      <p id="score">Score: 0</p>
+      <p id="final-score" style="display: none;">Final Score: 0</p>
+    </div>
+    <div id="game-area" style="position: relative; width: 100%; height: 400px; background-image: url('images/back.png'); background-size: cover; background-position: center; cursor: url('images/hand.png'), auto;">
+      <div id="target" style="position: absolute; width: 50px; height: 50px; background-color: blue; border-radius: 50%; display: none;"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let score = 0;
+    let timeLeft = 30;
+    let timerInterval;
+    const startButton = document.getElementById('start-button');
+    const gameArea = document.getElementById('game-area');
+    const target = document.getElementById('target');
+    const timerDisplay = document.getElementById('timer');
+    const scoreDisplay = document.getElementById('score');
+    const finalScoreDisplay = document.getElementById('final-score');
+
+    function moveTarget() {
+      const gameAreaRect = gameArea.getBoundingClientRect();
+      const targetSize = 50; 
+      const maxX = gameAreaRect.width - targetSize;
+      const maxY = gameAreaRect.height - targetSize;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      target.style.left = randomX + 'px';
+      target.style.top = randomY + 'px';
+    }
+
+    function updateScore() {
+      score++;
+      scoreDisplay.innerText = 'Score: ' + score;
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreDisplay.innerText = 'Score: ' + score;
+      timerDisplay.innerText = 'Time Left: ' + timeLeft + 's';
+      target.style.display = 'block';
+      finalScoreDisplay.style.display = 'none';
+      startButton.style.display = 'none';
+      moveTarget();
+
+        timerInterval = setInterval(function () {
+        timeLeft--;
+        timerDisplay.innerText = 'Time Left: ' + timeLeft + 's';
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      target.style.display = 'none';
+      startButton.style.display = 'block';
+      finalScoreDisplay.innerText = 'Final Score: ' + score;
+      finalScoreDisplay.style.display = 'block';
+    }
+
+    target.addEventListener('click', function() {
+      updateScore();
+      moveTarget();
+    });
+    startButton.addEventListener('click', startGame);
+  });
+
+  const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+    audio.play();
+  });
+});
+</script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
